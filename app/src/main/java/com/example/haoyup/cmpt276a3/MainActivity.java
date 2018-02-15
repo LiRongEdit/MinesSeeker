@@ -12,11 +12,14 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.example.haoyup.cmpt276a3.model.Square;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int NUM_ROWS = 4;
     private static final int NUM_COLS = 6;
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
+    private Square square;
 
 
     @Override
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
                 button.setPadding(0, 0, 0, 0);
+                
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
