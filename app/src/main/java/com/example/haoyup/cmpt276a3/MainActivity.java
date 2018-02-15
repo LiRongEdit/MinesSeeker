@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -14,12 +15,17 @@ import android.widget.TextView;
 
 import com.example.haoyup.cmpt276a3.model.Square;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int NUM_ROWS = 4;
     private static final int NUM_COLS = 6;
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
-    private Square square;
+    private Square square[][] = new Square[NUM_ROWS][NUM_COLS];
+    private int mineTotal = 6;
 
 
     @Override
@@ -27,7 +33,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Random assign the mines
+        fillInMine();
+        //Create table
         populateButton();
+    }
+
+    private void fillInMine() {
+        for (int i = 0; i < NUM_ROWS; i++) {
+            for (int j = 0; j < NUM_COLS; j++) {
+                //Initialize the square
+                square[i][j] = new Square();
+            }
+        }
+        int temp = mineTotal;
+        while (temp != 0){
+            for (int i = 0; i < NUM_ROWS; i++) {
+                for (int j = 0; j < NUM_COLS; j++) {
+                    //make a array of true and false
+                    int shuffle_List[] = {0, 1};
+                    Collections.shuffle(Arrays.asList(shuffle_List));
+                    //If fill all the mines, break
+                    if (temp == 0) {
+                        return;
+                    }
+                    //Randomly fill the mine
+                    else if (shuffle_List[0] == 0) {
+                        square[i][j].setExistence(true);
+                        temp--;
+                    }
+                }
+            }
+        }
     }
 
     private void populateButton() {
@@ -48,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
                 button.setPadding(0, 0, 0, 0);
-                
+
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -91,12 +128,15 @@ public class MainActivity extends AppCompatActivity {
         // Lock Button Sizes:
         lockButtonSizes();
         // Scale image
-        int newWidth = button.getWidth();
-        int newHeight = button.getHeight();
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mine);
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
-        Resources resource = getResources();
-        button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+        //If exist mine, show mine
+        if (square[row][col].isExistence() == true) {
+            int newWidth = button.getWidth();
+            int newHeight = button.getHeight();
+            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mine);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+            Resources resource = getResources();
+            button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+        }
 
     }
 
