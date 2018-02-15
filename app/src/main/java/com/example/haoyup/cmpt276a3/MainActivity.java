@@ -18,6 +18,7 @@ import com.example.haoyup.cmpt276a3.model.Square;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,11 +34,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Random assign the mines
+        // Random assign the mines
         fillInMine();
-        //Create table
+        // Create table
         populateButton();
+        // TO DO: Update the scan number
+        updateScan();
+
     }
+
 
     private void fillInMine() {
         for (int i = 0; i < NUM_ROWS; i++) {
@@ -46,19 +51,17 @@ public class MainActivity extends AppCompatActivity {
                 square[i][j] = new Square();
             }
         }
+        Random rand = new Random();
+        int count = 0;
         int temp = mineTotal;
         while (temp != 0){
             for (int i = 0; i < NUM_ROWS; i++) {
                 for (int j = 0; j < NUM_COLS; j++) {
                     //make a array of true and false
-                    int shuffle_List[] = {0, 1};
+                    int [] shuffle_List = new int[]{0, 1};
                     Collections.shuffle(Arrays.asList(shuffle_List));
-                    //If fill all the mines, break
-                    if (temp == 0) {
-                        return;
-                    }
                     //Randomly fill the mine
-                    else if (shuffle_List[0] == 0) {
+                    if (shuffle_List[0] == 0 && temp != 0) {
                         square[i][j].setExistence(true);
                         temp--;
                     }
@@ -129,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         lockButtonSizes();
         // Scale image
         //If exist mine, show mine
-        if (square[row][col].isExistence() == true) {
+        if (square[row][col].isExistence() == true && square[row][col].getIndex() == 0) {
             int newWidth = button.getWidth();
             int newHeight = button.getHeight();
             Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mine);
@@ -137,7 +140,43 @@ public class MainActivity extends AppCompatActivity {
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
         }
+        // If exist mine and already show the image, trigger the scan
+        else if (square[row][col].isExistence() == true && square[row][col].getIndex() == 1){
+            int count = 0;
+            // Check the hide mines in the same row
+            for (int i = 0; i < NUM_ROWS; i++) {
+                if (square[i][col].isExistence() == true && square[i][col].getIndex() == 0){
+                    count++;
+                }
+            }
+            // Check the hide mines in the same column
+            for (int j = 0; j < NUM_COLS; j++) {
+                if (square[row][j].isExistence() == true && square[row][j].getIndex() == 0){
+                    count++;
+                }
+            }
+            square[row][col].setScan(count);
+            button.setText("" + count);
+        }
 
+        else if (square[row][col].isExistence() == false && square[row][col].getIndex() == 0){
+            int count = 0;
+            // Check the hide mines in the same row
+            for (int i = 0; i < NUM_ROWS; i++) {
+                if (square[i][col].isExistence() == true && square[i][col].getIndex() == 0){
+                    count++;
+                }
+            }
+            // Check the hide mines in the same column
+            for (int j = 0; j < NUM_COLS; j++) {
+                if (square[row][j].isExistence() == true && square[row][j].getIndex() == 0){
+                    count++;
+                }
+            }
+            square[row][col].setScan(count);
+            button.setText("" + count);
+        }
+        square[row][col].addIndex();
     }
 
     private void lockButtonSizes() {
@@ -154,5 +193,8 @@ public class MainActivity extends AppCompatActivity {
                 button.setMaxHeight(height);
             }
         }
+    }
+
+    private void updateScan() {
     }
 }
