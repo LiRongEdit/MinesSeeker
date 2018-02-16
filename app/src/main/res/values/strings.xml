@@ -2,4 +2,6 @@
     <string name="app_name">Mine Seeker</string>
     <string name="congratulation">Congratulation!</string>
     <string name="start">Start</string>
+    <string name="mines"># Mines:</string>
+    <string name="board_size">Board size:</string>
 </resources>

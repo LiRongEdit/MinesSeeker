@@ -32,7 +32,13 @@ public class MenuActivity extends AppCompatActivity {
     }
     private void setUOptButton() {
         Button optButton = (Button) findViewById(R.id.optionBtn);
-
+        optButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = OptionActivity.makeIntent(MenuActivity.this);
+                startActivity(intent);
+            }
+        });
     }
     private void setUpHelpButton() {
         Button helpButton = (Button) findViewById(R.id.helpBtn);

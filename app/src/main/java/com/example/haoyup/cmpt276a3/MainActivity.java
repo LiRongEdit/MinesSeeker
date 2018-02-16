@@ -16,6 +16,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.example.haoyup.cmpt276a3.model.OptionSelect;
 import com.example.haoyup.cmpt276a3.model.Square;
 
 import java.text.MessageFormat;
@@ -26,11 +27,12 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int NUM_ROWS = 4;
-    private static final int NUM_COLS = 6;
-    Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
-    private Square square[][] = new Square[NUM_ROWS][NUM_COLS];
-    private int mineTotal = 6;
+    private OptionSelect optionSelect;
+    private int NUM_ROWS;
+    private int NUM_COLS;
+    private Button buttons[][];
+    private Square square[][];
+    private int mineTotal;
     private int found = 0;
     private int scanUsed = 0;
 
@@ -39,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        optionSelect = OptionSelect.getInstance();
+        NUM_ROWS = optionSelect.getRow();
+        NUM_COLS = optionSelect.getCol();
+        mineTotal = optionSelect.getMines();
+        buttons = new Button[NUM_ROWS][NUM_COLS];
+        square = new Square[NUM_ROWS][NUM_COLS];
 
         // Random assign the mines
         fillInMine();
