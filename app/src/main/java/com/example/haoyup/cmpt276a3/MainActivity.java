@@ -230,13 +230,37 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 0; j < NUM_COLS; j++) {
                 if (square[i][j].isExistence() == false && square[i][j].getIndex() > 0)
                 {
-                    square[i][j].decreaseScan();
-                    buttons[i][j].setText("" + square[i][j].getScan());
+                    int count = 0;
+                    // Check the hide mines in the same row
+                    for (int row = 0; row < NUM_ROWS; row++) {
+                        if (square[row][j].isExistence() == true && square[row][j].getIndex() == 0){
+                            count++;
+                        }
+                    }
+                    // Check the hide mines in the same column
+                    for (int col = 0; col < NUM_COLS; col++) {
+                        if (square[i][col].isExistence() == true && square[i][col].getIndex() == 0){
+                            count++;
+                        }
+                    }
+                    buttons[i][j].setText("" + count);
                 }
                 else if (square[i][j].isExistence() == true && square[i][j].getIndex() > 1)
                 {
-                    square[i][j].decreaseScan();
-                    buttons[i][j].setText("" + square[i][j].getScan());
+                    int count = 0;
+                    // Check the hide mines in the same row
+                    for (int row = 0; row < NUM_ROWS; row++) {
+                        if (square[row][j].isExistence() == true && square[row][j].getIndex() == 0){
+                            count++;
+                        }
+                    }
+                    // Check the hide mines in the same column
+                    for (int col = 0; col < NUM_COLS; col++) {
+                        if (square[i][col].isExistence() == true && square[i][col].getIndex() == 0){
+                            count++;
+                        }
+                    }
+                    buttons[i][j].setText("" + count);
                 }
             }
         }
