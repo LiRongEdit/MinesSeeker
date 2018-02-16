@@ -1,6 +1,8 @@
 package com.example.haoyup.cmpt276a3;
 
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -93,30 +95,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         gridButtonClicked(FINAL_ROW, FINAL_COL);
-//                        if (board[TEMP_ROW][TEMP_COL].isExistence()) {
-//                            gridButtonClicked(TEMP_ROW, TEMP_COL);
-//                            revealed++;
-//                            TextView textview = findViewById(R.id.revealedID);
-//                            textview.setText("FOUND " + revealed + "of " + Num_MINES);
-//                            board[TEMP_ROW][TEMP_COL].setExistence(false);
-//                            for (int i = 0; i < NUM_COLS; i++){
-//                                if (board[TEMP_ROW][i].isChecked())
-//                                    gridButtonClickedMineFree(TEMP_ROW, i);
-//                            }
-//                            for (int j = 0; j < NUM_ROWS; j++){
-//                                if (board[j][TEMP_COL].isChecked())
-//                                    gridButtonClickedMineFree(j, TEMP_COL);
-//                            }
-//                        }
-//                        else{
-//                            if (!board[TEMP_ROW][TEMP_COL].isChecked()) {
-//                                gridButtonClickedMineFree(TEMP_ROW, TEMP_COL);
-//                                scanned_done++;
-//                                TextView textview = findViewById(R.id.scanedID);
-//                                textview.setText("# of scan used: " + scanned_done);
-//                                board[TEMP_ROW][TEMP_COL].setChecked(true);
-//                            }
-//                        }
                     }
                 });
                 tableRow.addView(button);
@@ -158,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
                     count++;
                 }
             }
-            square[row][col].setScan(count);
             button.setText("" + count);
             scanUsed++;
         }
@@ -177,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
                     count++;
                 }
             }
-            square[row][col].setScan(count);
             button.setText("" + count);
             scanUsed++;
         }
@@ -264,5 +240,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    public static Intent makeIntent(Context context){
+        return new Intent(context, MainActivity.class);
     }
 }

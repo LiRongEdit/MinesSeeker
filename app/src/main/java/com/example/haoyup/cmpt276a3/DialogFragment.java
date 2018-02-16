@@ -2,6 +2,7 @@ package com.example.haoyup.cmpt276a3;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
@@ -21,6 +22,8 @@ public class DialogFragment extends AppCompatDialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // return main menu
+                Intent intent = MenuActivity.makeIntent(getActivity());
+                startActivity(intent);
             }
         };
         // Build the alert dialog
