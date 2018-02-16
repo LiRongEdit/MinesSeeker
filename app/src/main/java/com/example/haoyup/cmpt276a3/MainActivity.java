@@ -1,5 +1,6 @@
 package com.example.haoyup.cmpt276a3;
 
+import android.app.FragmentManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.haoyup.cmpt276a3.model.Square;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -210,7 +212,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        // Set up the textview of mine finding and scan used
+
+        // Alert dialog
+        if (found == mineTotal) {
+            android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+            DialogFragment dialog = new DialogFragment();
+            dialog.show(manager, "MessageDialog");
+        }
+            // Set up the textview of mine finding and scan used
         TextView textFind = (TextView) findViewById(R.id.findMine);
         textFind.setText("Found " + found + " of " + mineTotal + " mines");
         TextView textScan = (TextView) findViewById(R.id.scanUsed);
