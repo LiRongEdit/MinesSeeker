@@ -17,6 +17,12 @@ public class Square {
 
     public int getIndex() {return index;}
 
+    public int getScan()
+    {
+        return scan;
+    }
+
+
     public boolean isExistence() {
         return existence;
     }
@@ -28,5 +34,10 @@ public class Square {
     }
 
     public void setScan(int n) {scan = n;}
+
+    public void decreaseScan()
+    {
+        scan--;
+    }
 
 }

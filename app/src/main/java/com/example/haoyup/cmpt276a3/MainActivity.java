@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
     private Square square[][] = new Square[NUM_ROWS][NUM_COLS];
     private int mineTotal = 6;
+    private int found = 0;
+    private int scanUsed = 0;
 
 
     @Override
@@ -38,11 +40,9 @@ public class MainActivity extends AppCompatActivity {
         fillInMine();
         // Create table
         populateButton();
-        // TO DO: Update the scan number
-        updateScan();
-
+        // Update the scan number
+        updateUI();
     }
-
 
     private void fillInMine() {
         for (int i = 0; i < NUM_ROWS; i++) {
@@ -137,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+
+            found++;
+
         }
         // If exist mine and already show the image, trigger the scan
         else if (square[row][col].isExistence() == true && square[row][col].getIndex() == 1){
@@ -155,8 +158,9 @@ public class MainActivity extends AppCompatActivity {
             }
             square[row][col].setScan(count);
             button.setText("" + count);
+            scanUsed++;
         }
-
+        // Trigger the scan
         else if (square[row][col].isExistence() == false && square[row][col].getIndex() == 0){
             int count = 0;
             // Check the hide mines in the same row
@@ -173,8 +177,12 @@ public class MainActivity extends AppCompatActivity {
             }
             square[row][col].setScan(count);
             button.setText("" + count);
+            scanUsed++;
         }
         square[row][col].addIndex();
+
+        // Update the scan number
+        updateUI();
     }
 
     private void lockButtonSizes() {
@@ -193,6 +201,35 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateScan() {
+    private void updateUI() {
+        for (int i = 0; i < NUM_ROWS; i++) {
+            for (int j = 0; j < NUM_COLS; j++) {
+                Button button = buttons[i][j];
+                if (found == mineTotal) {
+                    button.setText("" + 0);
+                }
+            }
+        }
+        // Set up the textview of mine finding and scan used
+        TextView textFind = (TextView) findViewById(R.id.findMine);
+        textFind.setText("Found " + found + " of " + mineTotal + " mines");
+        TextView textScan = (TextView) findViewById(R.id.scanUsed);
+        textScan.setText("# Scans used: " + scanUsed);
+
+        // update the scan
+        for (int i = 0; i < NUM_ROWS; i++) {
+            for (int j = 0; j < NUM_COLS; j++) {
+                if (square[i][j].isExistence() == false && square[i][j].getIndex() > 0)
+                {
+                    square[i][j].decreaseScan();
+                    buttons[i][j].setText("" + square[i][j].getScan());
+                }
+                else if (square[i][j].isExistence() == true && square[i][j].getIndex() > 1)
+                {
+                    square[i][j].decreaseScan();
+                    buttons[i][j].setText("" + square[i][j].getScan());
+                }
+            }
+        }
     }
 }
