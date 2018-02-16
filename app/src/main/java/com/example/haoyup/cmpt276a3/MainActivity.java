@@ -57,11 +57,9 @@ public class MainActivity extends AppCompatActivity {
         while (temp != 0){
             for (int i = 0; i < NUM_ROWS; i++) {
                 for (int j = 0; j < NUM_COLS; j++) {
-                    //make a array of true and false
-                    int [] shuffle_List = new int[]{0, 1};
-                    Collections.shuffle(Arrays.asList(shuffle_List));
+                    int n = rand.nextInt(2);
                     //Randomly fill the mine
-                    if (shuffle_List[0] == 0 && temp != 0) {
+                    if (n == 0 && temp != 0) {
                         square[i][j].setExistence(true);
                         temp--;
                     }
