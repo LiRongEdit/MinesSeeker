@@ -31,8 +31,7 @@ public class HelpActivity extends AppCompatActivity {
         textView2.setMovementMethod(LinkMovementMethod.getInstance());
         String text2 = "<a href='http://www.shutterstock.com'> Link to the mine image </a>";
         textView2.setText(Html.fromHtml(text2));
-
-
+        //instructions
         TextView instruction = (TextView) findViewById(R.id.instructionID);
         instruction.setText("Use option manu to set up the scale of the game. During the game, click on the squares to reveal or to scan a spot, if there is a mine, then the mine will be revealed, if there isn't, the scan of how many mines it has vertically and horizontally. Use as few scan as possible to reveal all the mines to win the game");
 
