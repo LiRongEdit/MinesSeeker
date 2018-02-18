@@ -22,8 +22,10 @@ public class DialogFragment extends AppCompatDialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // return main menu
-                Intent intent = MenuActivity.makeIntent(getActivity());
+                Intent intent = new Intent(getActivity(), MenuActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+
             }
         };
         // Build the alert dialog

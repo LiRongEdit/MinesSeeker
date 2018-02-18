@@ -203,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
             android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
             DialogFragment dialog = new DialogFragment();
             dialog.show(manager, "MessageDialog");
+
         }
             // Set up the textview of mine finding and scan used
         TextView textFind = (TextView) findViewById(R.id.findMine);
