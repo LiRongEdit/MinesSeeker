@@ -19,13 +19,13 @@ public class HelpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
-
+        //cmpt276 home directory
         TextView textView = (TextView) findViewById(R.id.hyperlinkID);
         textView.setClickable(true);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
         String text = "<a href='http://www.cs.sfu.ca/CourseCentral/276/bfraser/index.html'> Link to cmpt276 </a>";
         textView.setText(Html.fromHtml(text));
-
+        //pics references
         TextView textView2 = (TextView) findViewById(R.id.hyperlinkID2);
         textView2.setClickable(true);
         textView2.setMovementMethod(LinkMovementMethod.getInstance());
