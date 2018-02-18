@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         populateButton();
         // Update the scan number
         updateUI();
+
+
     }
 
     private void fillInMine() {

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.haoyup.cmpt276a3.model.HelpActivity;
+
 public class MenuActivity extends AppCompatActivity {
 
     @Override
@@ -44,6 +46,13 @@ public class MenuActivity extends AppCompatActivity {
     }
     private void setUpHelpButton() {
         Button helpButton = (Button) findViewById(R.id.helpBtn);
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = HelpActivity.makeIntent(MenuActivity.this);
+                startActivity(intent);
+            }
+        });
 
     }
     public static Intent makeIntent(Context context){
