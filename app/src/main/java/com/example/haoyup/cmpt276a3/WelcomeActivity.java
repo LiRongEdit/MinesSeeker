@@ -23,6 +23,8 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = MenuActivity.makeIntent(WelcomeActivity.this);
                 startActivity(intent);
+
+                finish();
             }
         });
     }
