@@ -23,7 +23,7 @@ public class HelpActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.hyperlinkID);
         textView.setClickable(true);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a href='http://www.cs.sfu.ca/CourseCentral/276/bfraser/index.html'> Link to cmpt276 </a>";
+        String text = "<a href='http://www.cs.sfu.ca/CourseCentral/276/bfraser/index.html'> Link to cmpt 276 </a>";
         textView.setText(Html.fromHtml(text));
         //pics references
         TextView textView2 = (TextView) findViewById(R.id.hyperlinkID2);
