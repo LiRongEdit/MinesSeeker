@@ -32,6 +32,8 @@ public class OptionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = MenuActivity.makeIntent(OptionActivity.this);
                 startActivity(intent);
+
+                finish();
             }
         });
     }

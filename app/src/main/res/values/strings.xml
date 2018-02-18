@@ -4,4 +4,6 @@
     <string name="start">Start</string>
     <string name="mines"># Mines:</string>
     <string name="board_size">Board size:</string>
+    <string name="mine_seeker">Mine Seeker</string>
+    <string name="authors_rong_li_haoyu_peng">Authors: Rong Li, Haoyu Peng</string>
 </resources>

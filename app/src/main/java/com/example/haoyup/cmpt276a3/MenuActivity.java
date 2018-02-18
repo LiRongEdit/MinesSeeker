@@ -37,6 +37,8 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = OptionActivity.makeIntent(MenuActivity.this);
                 startActivity(intent);
+
+                finish();
             }
         });
     }
@@ -48,10 +50,5 @@ public class MenuActivity extends AppCompatActivity {
         return new Intent(context, MenuActivity.class);
     }
 
-    // Redefine the navigation back button
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
 }
 
